@@ -1,11 +1,14 @@
-"use client";
-import { motion, AnimatePresence } from "framer-motion";
-import { SectionHeader } from "../ui/SectionHeader";
+import AnimateSection from "../ui/AnimateSection";
+import StaggerContainer from "../ui/StaggerContainer";
+import StaggerItem from "../ui/StaggerItem";
 import { ResearchCard } from "../ui/ResearchCard";
-import { researchMock } from "@/lib/mockData";
 import { useResearchStore } from "@/store/useResearchStore";
-import { cn } from "@/lib/utils";
+import { researchMock } from "@/lib/mockData";
+import { SectionHeader } from "../ui/SectionHeader";
 import { GoldButton } from "../ui/GoldButton";
+import { cn } from "@/lib/utils";
+import { AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export function ResearchSection() {
   const { activeFilter, setFilter } = useResearchStore();
@@ -30,17 +33,17 @@ export function ResearchSection() {
             subtitle="Explore our comprehensive library of academic papers, market analyses, and student thesis projects."
             className="mb-0"
           />
-          <div className="flex flex-col gap-2 shrink-0 max-w-xs">
+          <AnimateSection direction="right" delay={0.2} className="flex flex-col gap-2 shrink-0 max-w-xs">
             <span className="text-xs text-gold-bright/80 font-bold uppercase tracking-wider">
               Selected student papers receive an honorarium limit up to 50,000 BDT
             </span>
             <GoldButton variant="outlined" className="bg-dark-bg" onClick={() => alert("Please sign up to submit research.")}>
               Submit Your Research
             </GoldButton>
-          </div>
+          </AnimateSection>
         </div>
         
-        <div className="flex flex-wrap gap-2 mb-12">
+        <AnimateSection direction="fade" className="flex flex-wrap gap-2 mb-12">
           {filters.map((filter) => (
             <button
               key={filter.id}
@@ -55,24 +58,25 @@ export function ResearchSection() {
               {filter.label}
             </button>
           ))}
-        </div>
+        </AnimateSection>
 
-        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <AnimatePresence>
+        <StaggerContainer staggerDelay={0.1} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <AnimatePresence mode="popLayout">
             {filteredResearch.map((item) => (
-              <motion.div
-                key={item.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-              >
-                <ResearchCard data={item} />
-              </motion.div>
+              <StaggerItem key={item.id}>
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ResearchCard data={item} />
+                </motion.div>
+              </StaggerItem>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </StaggerContainer>
       </div>
     </section>
   );

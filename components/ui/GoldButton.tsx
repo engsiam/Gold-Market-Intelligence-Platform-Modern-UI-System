@@ -24,10 +24,15 @@ export function GoldButton({ variant = "filled", className, children, ...props }
     >
       <span className="relative z-10 flex items-center gap-2">{children}</span>
       {variant === "filled" && (
-        <motion.div 
-          className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full"
-          animate={{ translateX: ["-100%", "200%"] }}
-          transition={{ repeat: Infinity, duration: 2.5, ease: "linear", repeatDelay: 1.5 }}
+        <motion.span
+          animate={{ x: ['-100%', '200%'] }}
+          transition={{ repeat: Infinity, duration: 2.5, ease: 'linear', repeatDelay: 1.5 }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(90deg, transparent, rgba(255,220,100,0.25), transparent)',
+            pointerEvents: 'none',
+          }}
         />
       )}
     </button>

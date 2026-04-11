@@ -8,7 +8,12 @@ export function Ticker() {
   if (!prices || prices.length === 0) return null;
 
   return (
-    <div className="w-full bg-gold-bright text-dark-bg py-2 overflow-hidden flex whitespace-nowrap border-b border-dark-bg/20">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      className="w-full bg-gold-bright text-dark-bg py-2 overflow-hidden flex whitespace-nowrap border-b border-dark-bg/20"
+    >
       <motion.div
         className="flex gap-12 pl-12"
         animate={{ x: [0, -1000] }}
@@ -25,6 +30,6 @@ export function Ticker() {
           </div>
         ))}
       </motion.div>
-    </div>
+    </motion.div>
   );
 }

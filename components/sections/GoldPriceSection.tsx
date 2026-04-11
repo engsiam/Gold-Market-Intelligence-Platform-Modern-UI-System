@@ -1,41 +1,29 @@
-"use client";
-import { motion } from "framer-motion";
-import { SectionHeader } from "../ui/SectionHeader";
-import { PriceTable } from "../ui/PriceTable";
-import { ChartWrapper } from "../ui/ChartWrapper";
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
-import { priceHistoryMock } from "@/lib/mockData";
+import AnimateSection from "../ui/AnimateSection";
+import { ChartWrapper } from "@/components/ui/ChartWrapper";
+import { PriceTable } from "@/components/ui/PriceTable";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
+import {priceHistoryMock} from "@/lib/mockData"
 
-const sectionVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, staggerChildren: 0.1 }
-  }
-};
+import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export function GoldPriceSection() {
   return (
     <section id="market-data" className="py-24 bg-dark-surface/50 border-t border-gold-brown/10 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          variants={sectionVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          <SectionHeader 
-            title="Today's Gold Prices" 
-            subtitle="Indicative retail rates provided by BAJUS for the domestic market. These benchmark prices ensure fair trade and transparency across Bangladesh."
-          />
+        <SectionHeader 
+          title="Today's Gold Prices" 
+          subtitle="Indicative retail rates provided by BAJUS for the domestic market. These benchmark prices ensure fair trade and transparency across Bangladesh."
+        />
 
-          <div className="grid lg:grid-cols-2 gap-12 mt-12 items-start">
-            <motion.div variants={sectionVariants} className="bg-dark-bg p-6 md:p-8 rounded-xl border border-gold-brown/20 shadow-2xl">
+        <div className="grid lg:grid-cols-2 gap-12 mt-12 items-start">
+          <AnimateSection direction="left" className="h-full">
+            <div className="bg-dark-bg p-6 md:p-8 rounded-xl border border-gold-brown/20 shadow-2xl h-full">
               <PriceTable />
-            </motion.div>
+            </div>
+          </AnimateSection>
 
-            <motion.div variants={sectionVariants} className="bg-dark-bg p-6 md:p-8 rounded-xl border border-gold-brown/20 shadow-2xl h-full flex flex-col">
+          <AnimateSection direction="right" className="h-full">
+            <div className="bg-dark-bg p-6 md:p-8 rounded-xl border border-gold-brown/20 shadow-2xl h-full flex flex-col">
               <h3 className="text-xl font-serif text-gold-light mb-6">30-Day Price Trend (18K BDT)</h3>
               <div className="flex-grow min-h-[300px]">
                 <ChartWrapper height="100%">
@@ -51,9 +39,9 @@ export function GoldPriceSection() {
                   </LineChart>
                 </ChartWrapper>
               </div>
-            </motion.div>
-          </div>
-        </motion.div>
+            </div>
+          </AnimateSection>
+        </div>
       </div>
     </section>
   );

@@ -1,3 +1,5 @@
+
+"use client";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { GoldPriceSection } from "@/components/sections/GoldPriceSection";
 import { MarketInsightsSection } from "@/components/sections/MarketInsightsSection";
@@ -14,11 +16,16 @@ import { HelpdeskSection } from "@/components/sections/HelpdeskSection";
 import { SocialSection } from "@/components/sections/SocialSection";
 import { AdSlot } from "@/components/sections/AdSlot";
 import { Divider } from "@/components/ui/Divider";
+import ScrollToTopButton from "@/components/ui/ScrollToTopButton";
+import AboutSection from "@/components/sections/AboutSection";
+
+
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <HeroSection />
+      <AboutSection />
       
       <AdSlot className="mt-8 mb-4 border-none" />
       
@@ -48,6 +55,7 @@ export default function Home() {
       <AdSlot className="mt-12 mb-8 bg-transparent border-none" />
       
       <SocialSection />
+        <ScrollToTopButton />
     </main>
   );
 }
