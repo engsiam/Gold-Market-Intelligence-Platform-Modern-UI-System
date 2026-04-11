@@ -1,5 +1,5 @@
 'use client'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, Variants } from 'framer-motion'
 import { useRef } from 'react'
 
 interface AnimateSectionProps {
@@ -9,16 +9,16 @@ interface AnimateSectionProps {
   className?: string
 }
 
-export default function AnimateSection({ 
-  children, 
-  delay = 0, 
+export default function AnimateSection({
+  children,
+  delay = 0,
   direction = 'up',
-  className 
+  className
 }: AnimateSectionProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
-  const variants = {
+  const variants: Variants = {
     hidden: {
       opacity: 0,
       y: direction === 'up' ? 40 : direction === 'down' ? -40 : 0,
@@ -31,7 +31,7 @@ export default function AnimateSection({
       transition: {
         duration: 0.65,
         delay,
-        ease: "easeInOut",
+        ease: 'easeInOut',
       },
     },
   }
