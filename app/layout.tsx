@@ -6,6 +6,7 @@ import { MobileMenu } from "@/components/layout/MobileMenu";
 import { Footer } from "@/components/layout/Footer";
 import { Ticker } from "@/components/ui/Ticker";
 import { Modal } from "@/components/ui/Modal";
+import { Analytics } from "@vercel/analytics/next";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -124,6 +125,7 @@ export default function RootLayout({
         </div>
         <Footer />
         <Modal />
+        <Analytics />
       </body>
     </html>
   );
